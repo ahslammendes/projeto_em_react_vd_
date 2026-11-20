@@ -209,7 +209,13 @@ export function App() {
           aoSimularPontoAleatorio={simularPontoAleatorio}
         />
 
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
+        <SecaoDestaqueAtletasRadar
+          partida={partidaAtual}
+          aoRegistrarAce={() => marcarPonto(partidaAtual.sacadorAtual, 'Ace')}
+          aoMarcarWinner={(numJogador) => marcarPonto(numJogador, 'Winner')}
+        />
+
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 items-start">
           {/* Coluna Esquerda (4 colunas): Hero, Métricas 2x2 e Cronômetro */}
           <section className="lg:col-span-4 space-y-6">
             <CardHeroPartida
@@ -322,12 +328,6 @@ export function App() {
             />
           </section>
         </div>
-
-        <SecaoDestaqueAtletasRadar
-          partida={partidaAtual}
-          aoRegistrarAce={() => marcarPonto(partidaAtual.sacadorAtual, 'Ace')}
-          aoMarcarWinner={(numJogador) => marcarPonto(numJogador, 'Winner')}
-        />
       </main>
 
       <Rodape
