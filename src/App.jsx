@@ -11,6 +11,8 @@ import { HistoricoJogadas } from './components/HistoricoJogadas';
 import { GraficoRitmoPartida } from './components/GraficoRitmoPartida';
 import { ResumoConfronto } from './components/ResumoConfronto';
 import { DestaquesTransmissao } from './components/DestaquesTransmissao';
+import { HeroDestaque } from './components/HeroDestaque';
+import { SecaoDestaqueAtletasRadar } from './components/SecaoDestaqueAtletasRadar';
 import { Rodape } from './components/Rodape';
 
 const PONTOS_LABELS = ['0', '15', '30', '40'];
@@ -199,7 +201,14 @@ export function App() {
         torneioAtual={`${partidaAtual.torneio} • ${partidaAtual.fase}`}
       />
 
-      <main className="mx-auto max-w-7xl px-4 py-8">
+      <main id="top" className="mx-auto max-w-7xl px-4 py-8">
+        <HeroDestaque
+          partida={partidaAtual}
+          cronometroRodando={cronometroRodando}
+          aoAlternarCronometro={setCronometroRodando}
+          aoSimularPontoAleatorio={simularPontoAleatorio}
+        />
+
         <div className="grid grid-cols-1 gap-6 lg:grid-cols-12">
           {/* Coluna Esquerda (4 colunas): Hero, Métricas 2x2 e Cronômetro */}
           <section className="lg:col-span-4 space-y-6">
@@ -314,8 +323,17 @@ export function App() {
           </section>
         </div>
 
-        <Rodape />
+        <SecaoDestaqueAtletasRadar
+          partida={partidaAtual}
+          aoRegistrarAce={() => marcarPonto(partidaAtual.sacadorAtual, 'Ace')}
+          aoMarcarWinner={(numJogador) => marcarPonto(numJogador, 'Winner')}
+        />
       </main>
+
+      <Rodape
+        torneioAtual={`${partidaAtual.torneio} • ${partidaAtual.fase}`}
+        quadraAtual={partidaAtual.quadra}
+      />
     </>
   );
 }

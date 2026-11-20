@@ -2,6 +2,7 @@ node_modules
 dist
 dist-ssr
 *.local
+.vercel
 /desing_system/
 /images/
 /skill/
